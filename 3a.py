@@ -3,22 +3,22 @@ def path(route):
     path = [(0, 0)]
     for step in steps:
         if step[0] == "U":
-            seg = [(path[-1][0], y) for y in range(path[-1][1]+1, path[-1][1]+int(step[1:])+1)]
+            seg = [(path[-1][0], y) for y in range(path[-1][1] + 1, path[-1][1] + int(step[1:]) + 1)]
             path.extend(seg)
         elif step[0] == "D":
-            seg = [(path[-1][0], y) for y in range(path[-1][1]-1, path[-1][1]-int(step[1:])-1, -1)]
+            seg = [(path[-1][0], y) for y in range(path[-1][1] - 1, path[-1][1] - int(step[1:]) - 1, -1)]
             path.extend(seg)
         elif step[0] == "R":
-            seg = [(x, path[-1][1]) for x in range(path[-1][0]+1, path[-1][0]+int(step[1:])+1)]
+            seg = [(x, path[-1][1]) for x in range(path[-1][0] + 1, path[-1][0] + int(step[1:]) + 1)]
             path.extend(seg)
         elif step[0] == "L":
-            seg = [(x, path[-1][1]) for x in range(path[-1][0]-1, path[-1][0] - int(step[1:])-1, -1)]
+            seg = [(x, path[-1][1]) for x in range(path[-1][0] - 1, path[-1][0] - int(step[1:]) - 1, -1)]
             path.extend(seg)
     return path
 
 
 def dist_origin(point):
-    dist = abs(point[0])+abs(point[1])
+    dist = abs(point[0]) + abs(point[1])
     return dist
 
 
