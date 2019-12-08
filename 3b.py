@@ -1,33 +1,23 @@
+import numpy as np
+
+
 def path(route):
     steps = route.split(",")
     path = [(0, 0)]
     for step in steps:
         if step[0] == "U":
-            seg = [(path[-1][0], y) for y in range(path[-1][1]+1, path[-1][1]+int(step[1:])+1)]
+            seg = [(path[-1][0], y) for y in range(path[-1][1] + 1, path[-1][1] + int(step[1:]) + 1)]
             path.extend(seg)
         elif step[0] == "D":
-            seg = [(path[-1][0], y) for y in range(path[-1][1]-1, path[-1][1]-int(step[1:])-1, -1)]
+            seg = [(path[-1][0], y) for y in range(path[-1][1] - 1, path[-1][1] - int(step[1:]) - 1, -1)]
             path.extend(seg)
         elif step[0] == "R":
-            seg = [(x, path[-1][1]) for x in range(path[-1][0]+1, path[-1][0]+int(step[1:])+1)]
+            seg = [(x, path[-1][1]) for x in range(path[-1][0] + 1, path[-1][0] + int(step[1:]) + 1)]
             path.extend(seg)
         elif step[0] == "L":
-            seg = [(x, path[-1][1]) for x in range(path[-1][0]-1, path[-1][0] - int(step[1:])-1, -1)]
+            seg = [(x, path[-1][1]) for x in range(path[-1][0] - 1, path[-1][0] - int(step[1:]) - 1, -1)]
             path.extend(seg)
     return path
-
-
-def dist_origin(point):
-    dist = abs(point[0])+abs(point[1])
-    return dist
-
-
-def min_manhattan(points):
-    min_point = points.pop()
-    for point in points:
-        if dist_origin(point) < dist_origin(min_point):
-            min_point = point
-    return min_point
 
 
 if __name__ == "__main__":
@@ -37,6 +27,6 @@ if __name__ == "__main__":
     path2 = path(route2)
     crossings = set(path1).intersection(set(path2))
     crossings.remove((0, 0))
-    print(crossings)
-    min_crossing = min_manhattan(crossings)
-    print(min_crossing, dist_origin(min_crossing))
+    lengths1 = [path1.index(i) for i in crossings]
+    lengths2 = [path2.index(i) for i in crossings]
+    print(np.add(lengths1, lengths2).min())
